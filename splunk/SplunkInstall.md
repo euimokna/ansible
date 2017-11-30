@@ -56,11 +56,12 @@ II.	설치 및 구성
 
 (1) anslbie 설치 :  /etc/ansible경로에 ansible이 설치됨 아래와 같은 하위 폴더가 생김 
 
-```
- [root@ansible-test \~\]\# yum install ansible                                                                  
- drwxr-xr-x. 2 root root 6 6월 2 06:49 roles                                                                                    
- -rw-r\--r\--. 1 root root 18066 6월 2 06:49 ansible.cfg                                                                            
- -rw-r\--r\--. 1 root root 1097 9월 13 23:28 hosts                
+``` 
+[root@ansible-test ~]# yum install ansible 
+
+drwxr-xr-x. 2 root root     6  6월  2 06:49 roles
+-rw-r--r--. 1 root root 18066  6월  2 06:49 ansible.cfg
+-rw-r--r--. 1 root root  1097  9월 13 23:28 hosts
 ```
 
 (2) ssh키 등록
