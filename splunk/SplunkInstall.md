@@ -37,8 +37,9 @@ II.	설치 및 구성
     python에서와 같이 indent에 주의해야 함 즉 줄간격을 잘 맞춰야 함
 
 
-II.	설치 및 구성	
-1.	구성도	
+
+## II.	설치 및 구성	
+## 1.	구성도	
 
 1)  2대의 VM에 각각 cent os 7 linux를 설치하여 1대에는 Ansible을
     설치하고 나머지 1대는 splunk Universal forwader를 자동으로 설치할
@@ -46,34 +47,34 @@ II.	설치 및 구성
 
 2)  Ansible이 설치되면 ansible-test라는 Host에서 실행한 명령어 및
     command가 host: splunk\_cent7에 전달된다.
+    
+    
 
-2.	ANSIBLE설치 	
+## 2.	ANSIBLE설치 	
 
 1)  설치 및 구성
 
 (1) anslbie 설치
 
-+------------------------------------------------------------------+
-| \[root@ansible-test \~\]\# yum install ansible                   |
-|                                                                  |
-| /etc/ansible경로에 ansible이 설치됨 아래와 같은 하위 폴더가 생김 |
-|                                                                  |
-| drwxr-xr-x. 2 root root 6 6월 2 06:49 roles                      |
-|                                                                  |
-| -rw-r\--r\--. 1 root root 18066 6월 2 06:49 ansible.cfg          |
-|                                                                  |
-| -rw-r\--r\--. 1 root root 1097 9월 13 23:28 hosts                |
-+------------------------------------------------------------------+
+```
+ \[root@ansible-test \~\]\# yum install ansible                   
+                                                                  
+ /etc/ansible경로에 ansible이 설치됨 아래와 같은 하위 폴더가 생김 
+                                                                  
+ drwxr-xr-x. 2 root root 6 6월 2 06:49 roles                                                                                    
+ -rw-r\--r\--. 1 root root 18066 6월 2 06:49 ansible.cfg                                                                            
+ -rw-r\--r\--. 1 root root 1097 9월 13 23:28 hosts                
+```
 
 (1) ssh키 등록
 
-+---------------------------------------------------------------------+
-| 키생성 :ssh-keygen -t rsa                                           |
-|                                                                     |
-| 키복사 :  ssh-copy-id -i \~/.ssh/id\_rsa.pub \[user\]@\[host\]      |
-|                                                                     |
-| 예시)ssh-copy-id -i /root/.ssh/id\_rsa.pub root@192.168.244.20      |
-+---------------------------------------------------------------------+
+```
+ 키생성 :ssh-keygen -t rsa                                          
+                                                                   
+ 키복사 :  ssh-copy-id -i \~/.ssh/id\_rsa.pub \[user\]@\[host\]     
+                                                                   
+ 예시)ssh-copy-id -i /root/.ssh/id\_rsa.pub root@192.168.244.20    
+```
 
 (1) 리모트 서버 IP등록
 
