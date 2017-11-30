@@ -33,6 +33,7 @@ II.	설치 및 구성
 ## 1.	구성도	
 
 1)2대의 VM에 각각 cent os 7 linux를 설치하여 1대에는 Ansible을 설치하고 나머지 1대는 splunk Universal forwader를 자동으로 설치할 예정이다.
+
 2)Ansible이 설치되면 ansible-test라는 Host에서 실행한 명령어 및 command가 host: splunk\_cent7에 전달된다   
 
 ## 2.	ANSIBLE설치 	
