@@ -12,19 +12,19 @@ II.	설치 및 구성
 2.	ANSIBLE설치 	
 3.	PLAYBOOK를 이용한 자동설치	
 
-=====
+----
 
-I.	ANSIBLE이란	
+# I.ANSIBLE이란	
 
-1. 개념 
+# 1. 개념 
 
-=====
+----
 
 리모트 서버에 접속해서 환경설정, 배포등을 가능하게 하는 오픈소스
 
 참고 :http://docs.ansible.com/ansible/latest/intro.html
 
-용어정리 : Facebook Ansible Korea User Group 참고 
+# 2. 용어정리 
 ======================================================================================================================
 
 1)  inventory : 작업의 대상이 되는 호스트들을 의미. 주로
@@ -40,6 +40,8 @@ I.	ANSIBLE이란
     호스트들에 대해 어떤 작업을 할것인지(파일 업로드, 복사, 등등)
     yaml문법 형태로 정의해놓은 것 yaml형식은 key-value방식인데
     python에서와 같이 indent에 주의해야 함 즉 줄간격을 잘 맞춰야 함
+    
+    * Facebook Ansible Korea User Group 참고 
 
 설치 및 구성 
 ============
