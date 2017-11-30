@@ -74,3 +74,54 @@ drwxr-xr-x. 2 root root     6  6월  2 06:49 roles
  예시)ssh-copy-id -i /root/.ssh/id\_rsa.pub root@192.168.244.20    
 ```
 
+(3)	리모트 서버 IP등록 
+
+```
+vi /etc/ansible/hosts 
+
+[splunk] 
+192.168.244.20 
+```
+
+- Ansible 
+(1)	/etc/ansible/hosts 등록된 서버에 ansible명령어로 ping을 날려본다. 
+
+```
+실행 : [root@ansible-test ansible]# ansible -m ping all
+
+결과 
+192.168.244.20 | SUCCESS => {
+"changed": false,
+"ping": "pong"
+}
+```
+(2) Ad-Hoc command를 통해  파일 upload를 해본다. (참고 http://docs.ansible.com/ansible/latest/intro_adhoc.html) 
+
+```
+예시 : ansible </etc/ansible/hosts등록된 명> -m <모듈명> "src=<로컬파일경로> dest=<리모트파일경로>" -u root
+
+실행: ansible splunk -m copy -a "src=/root/test_file.tar dest=/opt/test_file.tar" -u root
+
+실행결과
+[root@ansible-test ansible]# ansible splunk -m copy -a "src=/root/test_file.tar dest=/opt/test_file.tar" -u root 
+192.168.244.20 | SUCCESS => {
+ "changed": true,
+ "checksum": "09d1a3c5e4b6bfb9a03309e7e6ae9120355ffede",
+"dest": "/opt/test_file.tar",
+"gid": 0,
+"group": "root"
+ "md5sum": "f51c712f04c4eeefe2f42d9679364823",
+"mode": "0644",
+ "owner": "root",
+ "secontext": "system_u:object_r:usr_t:s0",
+"size": 10240,
+"src": "/root/.ansible/tmp/ansible-tmp-1505452178.83-191758065171232/source",
+"state": "file"
+ "uid": 0
+}
+
+대상(splunk universal forwarder서버) 확인 
+[root@splunk_cent7 ~]# cd /opt
+[root@splunk_cent7 opt]# ls -rtl
+-rw-r--r--. 1 root root       10240  9월 15 14:09 test_file.tar
+```
