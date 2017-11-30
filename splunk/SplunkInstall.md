@@ -29,18 +29,11 @@ II.	설치 및 구성
 3)Playbook : 한마디로 작업계획서 라고 할 수 있음. 작업대상의 호스트들에 대해 어떤 작업을 할것인지(파일 업로드, 복사, 등등) yaml문법 형태로 정의해놓은 것 yaml형식은 key-value방식인데 python에서와 같이 indent에 주의해야 함 즉 줄간격을 잘 맞춰야 함
 
 
-
 ## II.	설치 및 구성	
 ## 1.	구성도	
 
-1)  2대의 VM에 각각 cent os 7 linux를 설치하여 1대에는 Ansible을
-    설치하고 나머지 1대는 splunk Universal forwader를 자동으로 설치할
-    예정이다.
-
-2)  Ansible이 설치되면 ansible-test라는 Host에서 실행한 명령어 및
-    command가 host: splunk\_cent7에 전달된다.
-    
-    
+1)2대의 VM에 각각 cent os 7 linux를 설치하여 1대에는 Ansible을 설치하고 나머지 1대는 splunk Universal forwader를 자동으로 설치할 예정이다.
+2)Ansible이 설치되면 ansible-test라는 Host에서 실행한 명령어 및 command가 host: splunk\_cent7에 전달된다   
 
 ## 2.	ANSIBLE설치 	
 
