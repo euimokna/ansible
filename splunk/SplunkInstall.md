@@ -127,9 +127,9 @@ vi /etc/ansible/hosts
 ```
 
 ## 3.Playbook를 이용한 자동설치
-1)	Ad-Hoc검색은 매번 command 명령어를 날려야 하기 때문에 한번에 실행할 수 있는 playbook을 만든다. 앞서 add-hoc command를  yaml문법형태로 정의하면 된다. (참고 http://docs.ansible.com/ansible/latest/playbooks.html) 
+1)Ad-Hoc검색은 매번 command 명령어를 날려야 하기 때문에 한번에 실행할 수 있는 playbook을 만든다. 앞서 add-hoc command를  yaml문법형태로 정의하면 된다. (참고 http://docs.ansible.com/ansible/latest/playbooks.html) 
 
-2)	/etc/ansible에 playbooks라는 디렉토리를 만들고 splunk_install.yml이라는 파일을 만들어서 아래의 내용을 넣는다.
+2)/etc/ansible에 playbooks라는 디렉토리를 만들고 splunk_install.yml이라는 파일을 만들어서 아래의 내용을 넣는다.
 ```
 ---
 - hosts : splunk
@@ -171,7 +171,7 @@ vi /etc/ansible/hosts
   - name: splunk start
     command : /opt/splunkforwarder/bin/splunk start
 ```
-3)	[root@ansible-test playbooks]# Ansible-playbook splunk_install.yml 명령어 수행 결과 
+3)[root@ansible-test playbooks]# Ansible-playbook splunk_install.yml 명령어 수행 결과 
 
 ```
 root@ansible-test playbooks]# ansible-playbook splunk_install.yml
@@ -212,7 +212,7 @@ PLAY RECAP *********************************************************************
 192.168.244.20             : ok=9    changed=6    unreachable=0    failed=0
 ```
 
-4)	대상서버(splunk Universl forwarder)에 splunk설치 및 기동 학인 
+4)대상서버(splunk Universl forwarder)에 splunk설치 및 기동 학인 
 ```
 [root@splunk_cent7 opt]# ls -rtl
 -rw-r--r--. 1 root root       10240  9월 15 14:09 test_file.tar
