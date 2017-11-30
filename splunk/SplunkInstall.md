@@ -125,3 +125,121 @@ vi /etc/ansible/hosts
 [root@splunk_cent7 opt]# ls -rtl
 -rw-r--r--. 1 root root       10240  9월 15 14:09 test_file.tar
 ```
+
+## 3.Playbook를 이용한 자동설치
+1)	Ad-Hoc검색은 매번 command 명령어를 날려야 하기 때문에 한번에 실행할 수 있는 playbook을 만든다. 앞서 add-hoc command를  yaml문법형태로 정의하면 된다. (참고 http://docs.ansible.com/ansible/latest/playbooks.html) 
+
+2)	/etc/ansible에 playbooks라는 디렉토리를 만들고 splunk_install.yml이라는 파일을 만들어서 아래의 내용을 넣는다.
+```
+---
+- hosts : splunk
+  tasks :
+  - name : file transfer
+    copy :
+     src : "/root/splunkforwarder-6.6.3-e21ee54bc796-Linux-x86_64.tgz"
+     dest : "/opt/splunkforwarder-6.6.3-e21ee54bc796-Linux-x86_64.tgz"
+     mode : 0700
+  - name : check splunkforwarder if exist remove
+    stat : path=/opt/splunkforwarder
+    register : result
+    ignore_errors : True
+  - file :
+     path : /opt/splunkforwarder
+     state : absent
+    when : result|succeeded
+  - name : unarchive splulnk files
+    unarchive :
+     src : "/opt/splunkforwarder-6.6.3-e21ee54bc796-Linux-x86_64.tgz"
+     dest : "/opt"
+     remote_src: True
+  - file :
+     path : /opt/splunkforwarder
+     state : directory
+     owner : root
+     group : root
+  - lineinfile:
+     path : /etc/security/limits.conf
+     regexp: '^sEnd of file'
+     line: "{{item.domain}}           {{item.type}}        {{item.item}}        {{item.value}}"
+    with_items:
+       - {domain: '*', type: 'hard', item: 'nproc', value: '10240'}
+       - {domain: '*', type: 'soft', item: 'nproc', value: '10240'}
+       - {domain: '*', type: 'hard', item: 'nofile', value: '10240'}
+       - {domain: '*', type: 'soft', item: 'nofile', value: '10240'}     
+  - name: auto start register
+    command : /opt/splunkforwarder/bin/splunk enable boot-start -user root --accept-license
+  - name: splunk start
+    command : /opt/splunkforwarder/bin/splunk start
+```
+3)	[root@ansible-test playbooks]# Ansible-playbook splunk_install.yml 명령어 수행 결과 
+
+```
+root@ansible-test playbooks]# ansible-playbook splunk_install.yml
+
+PLAY [splunk] ***************************************************************************************************
+
+TASK [Gathering Facts] ******************************************************************************************
+ok: [192.168.244.20]
+
+TASK [file transfer] ********************************************************************************************
+ok: [192.168.244.20]
+
+TASK [check splunkforwarder if exist remove] ********************************************************************
+ok: [192.168.244.20]
+
+TASK [file] *****************************************************************************************************
+changed: [192.168.244.20]
+
+TASK [unarchive splulnk files] **********************************************************************************
+changed: [192.168.244.20]
+
+TASK [file] *****************************************************************************************************
+changed: [192.168.244.20]
+
+TASK [lineinfile] ***********************************************************************************************
+changed: [192.168.244.20] => (item={u'item': u'nproc', u'domain': u'*', u'type': u'hard', u'value': u'10240'})
+changed: [192.168.244.20] => (item={u'item': u'nproc', u'domain': u'*', u'type': u'soft', u'value': u'10240'})
+changed: [192.168.244.20] => (item={u'item': u'nofile', u'domain': u'*', u'type': u'hard', u'value': u'10240'})
+changed: [192.168.244.20] => (item={u'item': u'nofile', u'domain': u'*', u'type': u'soft', u'value': u'10240'})
+
+TASK [auto start register] **************************************************************************************
+changed: [192.168.244.20]
+
+TASK [splunk start] *********************************************************************************************
+changed: [192.168.244.20]
+
+PLAY RECAP ******************************************************************************************************
+192.168.244.20             : ok=9    changed=6    unreachable=0    failed=0
+```
+
+4)	대상서버(splunk Universl forwarder)에 splunk설치 및 기동 학인 
+```
+[root@splunk_cent7 opt]# ls -rtl
+-rw-r--r--. 1 root root       10240  9월 15 14:09 test_file.tar
+drwxr-xr-x. 9 root root         231  9월 15 17:39 splunkforwarder
+
+[root@splunk_cent7 opt]# ps -ef | grep splunkd
+root      25809      1  0 17:39 ?        00:00:00 splunkd -p 8089 start
+root      25814  25809  0 17:39 ?        00:00:00 [splunkd pid=25809] splunkd -p 8089 start [process-runner]
+root      25865   3744  0 17:44 pts/0    00:00:00 grep --color=auto splunkd
+
+[root@splunk_cent7 opt]# cat /etc/security/limits.conf
+……
+……
+#<domain>      <type>  <item>         <value>
+#
+
+#*               soft    core            0
+#*               hard    rss             10000
+#@student        hard    nproc           20
+#@faculty        soft    nproc           20
+#@faculty        hard    nproc           50
+#ftp             hard    nproc           0
+#@student        -       maxlogins       4
+
+# End of file
+*           hard        nproc        10240
+*           soft        nproc        10240
+*           hard        nofile        10240
+*           soft        nofile        10240
+```
