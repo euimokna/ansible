@@ -22,19 +22,11 @@ II.	설치 및 구성
 
 ## 2. 용어정리 (* Facebook Ansible Korea User Group 참고) 
 
-1)  inventory : 작업의 대상이 되는 호스트들을 의미. 주로
-    /etc/ansible/hosts 파일에 기록하며 ip address 또는 hostname으로
-    정의할 수 있음 .또한 이 파일에서 각 호스트들의 그룹을 지정할 수 있기
-    때문에 다수의 서버들을 한번에 관리할 때 매우 유리
+1) inventory : 작업의 대상이 되는 호스트들을 의미. 주로/etc/ansible/hosts 파일에 기록하며 ip address 또는 hostname으로 정의할 수 있음 .또한 이 파일에서 각 호스트들의 그룹을 지정할 수 있기 때문에 다수의 서버들을 한번에 관리할 때 매우 유리
 
-2)  Module : 작업도구로써 ansible이 실행시키는 모든 job은 이 module들을
-    기반으로 생성됨 ansible-doc \<module\_nanme\> 명령어를 통해 현재
-    버전의 ansible이 어떤 모듈을 지원하고 어떻게 사용해야하는지 확인가능
+2) Module : 작업도구로써 ansible이 실행시키는 모든 job은 이 module들을 기반으로 생성됨 ansible-doc \<module\_nanme\> 명령어를 통해 현재 버전의 ansible이 어떤 모듈을 지원하고 어떻게 사용해야하는지 확인가능
 
-3)  Playbook : 한마디로 작업계획서 라고 할 수 있음. 작업대상의
-    호스트들에 대해 어떤 작업을 할것인지(파일 업로드, 복사, 등등)
-    yaml문법 형태로 정의해놓은 것 yaml형식은 key-value방식인데
-    python에서와 같이 indent에 주의해야 함 즉 줄간격을 잘 맞춰야 함
+3) Playbook : 한마디로 작업계획서 라고 할 수 있음. 작업대상의 호스트들에 대해 어떤 작업을 할것인지(파일 업로드, 복사, 등등) yaml문법 형태로 정의해놓은 것 yaml형식은 key-value방식인데 python에서와 같이 indent에 주의해야 함 즉 줄간격을 잘 맞춰야 함
 
 
 
@@ -84,6 +76,7 @@ vi /etc/ansible/hosts
 ```
 
 - Ansible
+
 (1)/etc/ansible/hosts 등록된 서버에 ansible명령어로 ping을 날려본다. 
 
 ```
