@@ -83,8 +83,8 @@ vi /etc/ansible/hosts
 192.168.244.20 
 ```
 
-- Ansible 
-(1)	/etc/ansible/hosts 등록된 서버에 ansible명령어로 ping을 날려본다. 
+- Ansible
+(1)/etc/ansible/hosts 등록된 서버에 ansible명령어로 ping을 날려본다. 
 
 ```
 실행 : [root@ansible-test ansible]# ansible -m ping all
