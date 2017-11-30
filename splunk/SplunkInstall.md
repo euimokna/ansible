@@ -52,7 +52,7 @@ II.	설치 및 구성
 
 ## 2.	ANSIBLE설치 	
 
-1)  설치 및 구성
+- 설치 및 구성
 
 (1) anslbie 설치
 
@@ -66,7 +66,7 @@ II.	설치 및 구성
  -rw-r\--r\--. 1 root root 1097 9월 13 23:28 hosts                
 ```
 
-(1) ssh키 등록
+(2) ssh키 등록
 
 ```
  키생성 :ssh-keygen -t rsa                                          
