@@ -36,6 +36,8 @@ II.	설치 및 구성
 
 2)Ansible이 설치되면 ansible-test라는 Host에서 실행한 명령어 및 command가 host: splunk\_cent7에 전달된다   
 
+![구성도](https://github.com/euimokna/ansible/blob/master/ansible_splunk.png)
+
 ## 2.	ANSIBLE설치 	
 
 - 설치 및 구성
