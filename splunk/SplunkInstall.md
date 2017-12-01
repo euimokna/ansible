@@ -1,4 +1,4 @@
-# Splunk UniversalForwarder자동설치(Ansible오픈소스 이용)
+# Splunk UniversalForwarder자동설치 (Ansible오픈소스 이용)
 *****************************************************************
 
 목 차
